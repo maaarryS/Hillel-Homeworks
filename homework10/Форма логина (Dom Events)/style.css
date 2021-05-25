@@ -1,0 +1,55 @@
+.container {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  margin: 24px 12px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  margin: 240px 120px;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 140px;
+  padding: 50px;
+  border: solid 1px;
+}
+
+#data {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+  height: 90px;
+}
+
+.content-input {
+  margin: 5px;
+}
+
+#btn {
+  margin-top: 12px;
+}
+
+.result-message {
+  border: solid 2px;
+  padding: 20px 5px;
+  width: 185px;
+  margin: 10px;
+  text-align: center;
+}
+
+#success {
+  background-color: rgba(68, 184, 44, 0.4);
+  border-color: rgb(68, 184, 44);
+}
+
+#fail {
+  background-color:rgba(220, 52, 52, 0.4);
+  border-color: rgb(220, 52, 52);
+}
