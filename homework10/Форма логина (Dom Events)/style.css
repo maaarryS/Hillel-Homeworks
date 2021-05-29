@@ -37,11 +37,15 @@
 }
 
 .result-message {
-  border: solid 2px;
+  border: solid 1px;
   padding: 20px 5px;
   width: 185px;
   margin: 10px;
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
 
 #success {

@@ -11,7 +11,7 @@
   enableBtn(userName, password);
   });
 
-  btnEl.addEventListener("click", function(){checkData(userName, password)});
+  btnEl.addEventListener("click", function() {checkData(userName, password)});
 }) ();
 
 
