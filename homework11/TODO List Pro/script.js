@@ -1,14 +1,16 @@
 function createNewItem() {
+  let newValue = input.value;
+  if(newValue) {
+    let newItem = {
+      toDo: newValue,
+      checked: false,
+      time: new Date(),
+    }
 
-  let newItem = {
-    toDo: input.value,
-    checked: false,
-    time: new Date(),
+    toDoList.push(newItem);
+    displayItems();
+    input.value = "";
   }
-
-  toDoList.push(newItem);
-  displayItems();
-  input.value = "";
 }
 
 function displayItems() {
@@ -17,7 +19,7 @@ function displayItems() {
   toDoList.forEach( function(item, i){
     let date = `${item.time.getDate()}-${item.time.getMonth() + 1}-${item.time.getFullYear()}   ${item.time.getHours()}:${item.time.getMinutes()}:${item.time.getSeconds()}`;
     itemList += `
-      <li>
+      <li class="todo-item">
         <input type="checkbox" id="item-${i}" ${item.checked ? "checked" : ""} class="check-box">
         <label for="item-${i}" class="item-value${item.checked ? " checked-item" : ""}">${item.toDo}</label>
         <span id="time-${i}" class="date">${date}</span>

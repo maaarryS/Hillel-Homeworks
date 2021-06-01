@@ -5,9 +5,7 @@
   justify-content: center;
   margin: 24px 12px;
   align-items: center;
-  
 }
-
 
 input {
   box-sizing: border-box;
@@ -25,13 +23,21 @@ button {
   margin: 0;
 }
 
-#list li {
+li {
   list-style: none;
 }
 
 #list {
   padding: 0;
   width: 450px;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: 30px repeat(2, 140px) repeat(2, 50px);
+  grid-column-gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .date {
@@ -47,4 +53,8 @@ button {
 
 .checked-item {
   text-decoration: line-through;
+}
+
+.delete-button, .copy-button {
+  width: 50px;
 }
