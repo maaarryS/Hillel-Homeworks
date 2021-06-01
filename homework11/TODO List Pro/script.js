@@ -1,9 +1,3 @@
-let input = document.getElementById("input");
-let list = document.getElementById("list");
-let btn = document.getElementById("btn");
-
-let toDoList = [];
-
 function createNewItem() {
 
   let newItem = {
@@ -35,7 +29,6 @@ function displayItems() {
   })
 }
 
-
 function copyItem(item) {
   let itemCopy = {
     toDo: item.toDo,
@@ -47,9 +40,13 @@ function copyItem(item) {
   input.value = "";
 }
 
+let input = document.getElementById("input");
+let list = document.getElementById("list");
+let btn = document.getElementById("btn");
+let toDoList = [];
+
 list.addEventListener("click", evt => {
   let checkBoxes = list.querySelectorAll(".check-box");
-
   for (item of checkBoxes) {
     if (evt.target === item) {
       let idInput = evt.target.getAttribute("id");
@@ -76,6 +73,5 @@ list.addEventListener("click", evt => {
   }
   displayItems();
 })
-
 
 btn.addEventListener("click", createNewItem);
