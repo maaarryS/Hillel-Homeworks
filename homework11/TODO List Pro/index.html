@@ -18,5 +18,15 @@
     <h1>To Do:</h1>
     <ul id="list"></ul>
 </div>
+
+<script type="text/javascript">
+  <li class="todo-item">
+        <input type="checkbox" id="item-${i}" ${item.checked ? "checked" : ""} class="check-box">
+        <label for="item-${i}" class="item-value${item.checked ? " checked-item" : ""}">${item.toDo}</label>
+        <span id="time-${i}" class="date">${date}</span>
+        <button class="delete-button">Delete</button>
+        <button class="copy-button">Copy</button>
+      </li>
+</script>
 </body>
 </html>
