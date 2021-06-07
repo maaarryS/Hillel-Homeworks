@@ -3,17 +3,17 @@ function Student(name, faculty, marks) {
   this.faculty = faculty;
   this.marks = marks;
   this.avgMark = function() {
-    let sum = marks.reduce((a, b) => a + b, 0);
-    return sum / marks.length;
+    let sum = this.marks.reduce((a, b) => a + b, 0);
+    return sum / this.marks.length;
   };
   this.maxMark = function() {
-    return marks.reduce((a, b) => (a > b) ? a : b);
+    return this.marks.reduce((a, b) => (a > b) ? a : b);
   };
   this.minMark = function() {
-    return marks.reduce((a, b) => (b > a) ? a : b);
+    return this.marks.reduce((a, b) => (b > a) ? a : b);
   };
   this.total = function() {
-    return sum = marks.reduce((a, b) => a + b, 0);
+    return sum = this.marks.reduce((a, b) => a + b, 0);
   };
   this.info = function() {
     return `${this.name} from course ${this.faculty} has total ${this.total()} scores!`;
