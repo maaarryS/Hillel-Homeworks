@@ -1,79 +1,55 @@
-function createNewItem() {
-  let newValue = input.value;
-  if(newValue) {
-    let newItem = {
-      toDo: newValue,
-      checked: false,
-      time: new Date(),
-    }
+let itemInputEl = document.getElementById("item-input");
+let listEl = document.getElementById("todo-list");
+let addItemBtnEl = document.getElementById("add-item-button");
+let itemTemplate = document.querySelector("#item-template").innerHTML;
 
-    toDoList.push(newItem);
-    displayItems();
-    input.value = "";
+const render = (template, dataObject) => {
+  for (let key in dataObject) {
+    template = template.replaceAll(`{{${key}}}`, dataObject[key]);
   }
+  return template;
 }
 
-function displayItems() {
-  let itemList = "";
-  if (toDoList.length === 0) list.innerHTML = "";
-  toDoList.forEach( function(item, i){
-    let date = `${item.time.getDate()}-${item.time.getMonth() + 1}-${item.time.getFullYear()}   ${item.time.getHours()}:${item.time.getMinutes()}:${item.time.getSeconds()}`;
-    itemList += `
-      <li class="todo-item">
-        <input type="checkbox" id="item-${i}" ${item.checked ? "checked" : ""} class="check-box">
-        <label for="item-${i}" class="item-value${item.checked ? " checked-item" : ""}">${item.toDo}</label>
-        <span id="time-${i}" class="date">${date}</span>
-        <button class="delete-button">Delete</button>
-        <button class="copy-button">Copy</button>
-      </li>
-    `;
-    list.innerHTML = itemList;
-  })
-}
+const addItem = (todoItem, list) => {
+  return function() {
+    let newItem = todoItem.value;
 
-function copyItem(item) {
-  let itemCopy = {
-    toDo: item.toDo,
-    checked: false,
-    time: new Date()
-  }
-  toDoList.push(itemCopy);
-  displayItems();
-  input.value = "";
-}
-
-let input = document.getElementById("input");
-let list = document.getElementById("list");
-let btn = document.getElementById("btn");
-let toDoList = [];
-
-list.addEventListener("click", evt => {
-  let checkBoxes = list.querySelectorAll(".check-box");
-  for (item of checkBoxes) {
-    if (evt.target === item) {
-      let idInput = evt.target.getAttribute("id");
-      let i = idInput.slice(-1);
-    
-      let item = toDoList[i];
-      item.checked = !item.checked;
+    if (todoItem.tagName === "SPAN") {
+      newItem = todoItem.textContent;
     }
+    if(!newItem) return;
+  
+    const liEl = document.createElement("li");
+    liEl.innerHTML = render(itemTemplate, {
+      label: newItem,
+      date: new Date().toISOString()
+    });
+    list.append(liEl);
+    itemInputEl.value = "";
   }
   
-});
+};
+
+addItemBtnEl.addEventListener("click", addItem(itemInputEl, listEl));
 
 
-list.addEventListener("click", evt => {
-  let itemEls = list.children;
-  for (i = 0; i < itemEls.length; i++) {
-    let dltBtn = itemEls[i].querySelector(".delete-button");
-    let copyBtn = itemEls[i].querySelector(".copy-button");
-
-    if (evt.target === dltBtn) {
-      toDoList.splice(i, 1);
+const onCheckBoxToggle = (evt) => {
+  const currentItem = evt.target.parentElement;
+  const todoItem = evt.target.parentElement.querySelector(".item-value");
+  if (evt.target.type === "checkbox") {
+    currentItem.checked = !currentItem.checked;
+    if (currentItem.checked) {
+      todoItem.classList.add("checked-item");
+    } else if (!currentItem.checked) {
+      todoItem.classList.remove("checked-item");
     }
-    if (evt.target === copyBtn) copyItem(toDoList[i]);
   }
-  displayItems();
-})
+  if (evt.target.dataset["action"] === "delete") {
+    evt.target.parentElement.remove();
+  }
+  if (evt.target.dataset["action"] === "copy") {
+    addItem(todoItem, listEl)();
+  }
+}
 
-btn.addEventListener("click", createNewItem);
+listEl.addEventListener("click", onCheckBoxToggle);
