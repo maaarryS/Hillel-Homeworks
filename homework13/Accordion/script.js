@@ -42,6 +42,7 @@ function getOpenIndexes() {
       result.push(i);
   }
   console.log(result);
+  return result;
 }
 
 function closeAllBlocks() {
@@ -69,10 +70,10 @@ setTimeout(() => {
 
 
 let openIndexesBtn = document.getElementById("opened-blocks");
-openIndexesBtn.addEventListener("click", getOpenIndexes.bind(mainAccordion));
+openIndexesBtn.addEventListener("click", mainAccordion.getOpenIndexes.bind(mainAccordion));
 
 let closeAllBtn = document.getElementById("close-all");
-closeAllBtn.addEventListener("click", closeAllBlocks.bind(mainAccordion));
+closeAllBtn.addEventListener("click", mainAccordion.closeAllBlocks.bind(mainAccordion));
 
 let openAllBtn = document.getElementById("open-all");
-openAllBtn.addEventListener("click", openAllBlocks.bind(mainAccordion));
+openAllBtn.addEventListener("click", mainAccordion.openAllBlocks.bind(mainAccordion));
