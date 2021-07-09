@@ -1,6 +1,4 @@
 (function() {
-  let userName, password;
-
   const loginEl = document.getElementById("login"),
         pswdEl = document.getElementById("password"),
         mainEl = document.getElementById("main"),
@@ -8,20 +6,20 @@
         msgEls = document.getElementsByClassName("result-message");
 
   
-  function enableBtn(userName, password) {
-    if (userName && password) {
+  function enableBtn() {
+    if (loginEl.value && pswdEl.value) {
       btnEl.removeAttribute("disabled", "true");
     }
   }
 
   loginEl.addEventListener("input", (evt) => {
   userName = evt.target.value;
-  enableBtn(userName, password);
+  enableBtn();
   });
 
   pswdEl.addEventListener("input", (evt) => {
   password = evt.target.value;
-  enableBtn(userName, password);
+  enableBtn();
   });
 
   btnEl.addEventListener("click", () => {
