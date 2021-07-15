@@ -47,7 +47,7 @@
       failMsg.id = "fail";
       failMsg.textContent = "Failed to verify user. Try again";
       mainEl.append(failMsg);
-      console.log("Fail:", e);
+      console.error(e);
       throw new Error(e);
     })
     .then(() => {
@@ -64,7 +64,7 @@
       }
     })
     .catch(e => {
-      console.log(e);
+      console.error(e);
     });
   });
 }) ();
