@@ -25,5 +25,8 @@ export const checkUserCredentials = function(userName, password) {
 
 export const getUserList = (page = 1) => {
   return fetch(`${API_URL}/users?page=${page}`)
-    .then(e => e.json());
+    .then(e => e.json())
+    .catch(e => {
+      console.error(e);
+    });
 };

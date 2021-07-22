@@ -4,11 +4,7 @@ import {checkUserCredentials} from "../../api.js";
 export class LoginFormComponent extends Component{
   
   constructor(template, entryId, onSuccess) {
-    super();
-    const el = document.createElement("div");
-    el.insertAdjacentHTML("afterbegin", template);
-    this.templateEl = el;
-    this.entryEl = document.getElementById(entryId);
+    super(template, entryId);
     this.onSuccess = onSuccess;
 
     this.loginInputEl = this.templateEl.querySelector("#login");
