@@ -3,7 +3,6 @@ import UserListComponent from "./components/UserList/UserListComponent.js";
 import {getUserList} from "./api.js";
 
 const isUserLoggedIn = localStorage.getItem("token");
-console.log(isUserLoggedIn);
 
 const loginFormComponent = new LoginFormComponent(
   document.getElementById("login-form-template").innerHTML, 
@@ -31,16 +30,15 @@ function onLogOut() {
 
 function loadUsers() {
   getUserList()
-    .then(({ data }) => {
-      console.log(data);
-      userListComponent.setState({ list: data });
-    })
-    .catch(e => console.log(e));
+  .then(({ data }) => {
+    userListComponent.setState({ list: data });
+  })
+  .catch(e => console.log(e));
 }
 
 if (!isUserLoggedIn) {
   loginFormComponent.render();
 } else {
-  loadUsers();
+    loadUsers();
 }
 

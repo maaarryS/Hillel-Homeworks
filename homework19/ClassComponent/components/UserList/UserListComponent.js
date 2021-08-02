@@ -7,12 +7,16 @@ export default class UserListComponent extends Component{
   constructor(template, entryId, onLogOut) {
     super(template, entryId);
 
-    this.getElementById("log-out-btn").addEventListener("click", onLogOut);
+    this.addListener("#log-out-btn", "click", onLogOut);
 
     this.state = {
       list: [],
       user: {}
     };
+
+    this.isNewUser = false;
+
+    this.userFormEl = this.realQuerySelector("#user-form");
 
     this.addListener("#list", "click", e => {
       e.target.classList.contains("delete") && this.onDelete(e);
@@ -27,36 +31,73 @@ export default class UserListComponent extends Component{
         }
       });
 
+      this.isNewUser = true;
+
       this.openUserModal();
     });
 
     this.addListener("#user-form", "click", e => {
       if (e.target.classList.contains("is-primary")) {
-        e.preventDefault();
         this.onUserUpdateConfirm();
       }
     });
   }
 
   onUserUpdateConfirm() {
-    const {user} = this.state;
 
-    const name = this.realQuerySelector("#name-field").value;
+    const newName = this.realQuerySelector("#name-field").value;
     const job = this.realQuerySelector("#job-field").value;
+    let {list, user} = this.state;
 
-    createUser(name, job);
-  }
+    if (this.isNewUser) {
+      createUser(newName, job)
+      .then(({name}) => {
+        let newUserName = name.trim().split(" ");
+        this.isNewUser = false;
+        let newUser = {
+          id: list.length + 1,
+          first_name: newUserName[0],
+          last_name: newUserName[1],
+          avatar: "https://reqres.in/img/faces/4-image.jpg"
+        };
+        list.push(newUser);
+        return list;
+    })
+    .then(e => {
+      this.setState({list: this.state.list});
+    })
+    .catch(console.log);
+  } else {
+      const id = user.id;
+      const name = user.first_name + user.last_name;
+      const job = "user";
+
+      updateUser(id, name, job)
+        .then(({name}) => {
+          let newUserName = newName.trim().split(" ");
+  
+          user.first_name = newUserName[0];
+          user.last_name = newUserName[1];
+        })
+        .then(e => {
+          this.setState({list: this.state.list});
+        })
+        .catch(console.log);;
+      }
+
+    };
+  
 
   onDelete(evt) {
     const id = evt.target.parentElement.dataset["id"];
 
-    deleteUser(id)
+    deleteUser(id)  
       .then(e => {
         this.setState({
           list: this.state.list.filter(e => +e.id !== +id),
         });
       });
-  }
+  };
 
   openUserModal() {
     const userFormEl = this.getRealElementById("user-form");
@@ -65,22 +106,19 @@ export default class UserListComponent extends Component{
 
   onUpdateOpen(evt) {
     const id = evt.target.parentElement.dataset["id"];
-
    
     this.setState({
       user: this.state.list.find(e => +e.id === +id),
     });
-
     this.openUserModal();
   }
 
   render() {
-    const {list, user} = this.state;
-
+    let {list, user} = this.state;
     super.render();
 
-    const listEl = this.getElementById("list");
-    const liTpl = listEl.firstElementChild.outerHTML;
+    const listEl = this.getRealElementById("list");
+    const liTpl = this.querySelector("#list > li").outerHTML;
 
     const userFormEl = this.getRealElementById("user-form");
     const userFormTpl = this.querySelector("#user-form").innerHTML;

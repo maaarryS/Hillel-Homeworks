@@ -53,11 +53,15 @@ export default class Component {
   }
 
   setState(state) {
+    if(state.list) {
+      for(let i = 0; i < state.list.length; i++) {
+        state.list[i].id = i + 1;
+      }
+    }
     this.state = {
       ...this.state,
       ...state
     };
-
     this.render();
   }
 

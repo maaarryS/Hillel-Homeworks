@@ -7,14 +7,14 @@ export default class LoginFormComponent extends Component{
     super(template, entryId);
     this.onSuccess = onSuccess;
 
-    this.loginInputEl = this.getElementById("login");
-    this.passwordInputEl = this.getElementById("password");
-    this.signInBtnEl = this.getElementById("sign-in-btn");
-    this.errorMessageEl = this.getElementById('error-message');
+    this.loginInputEl = this.getRealElementById("login");
+    this.passwordInputEl = this.getRealElementById("password");
+    this.signInBtnEl = this.getRealElementById("sign-in-btn");
+    this.errorMessageEl = this.getRealElementById('error-message');
 
-    this.loginInputEl.addEventListener("input", this.validate.bind(this));
-    this.passwordInputEl.addEventListener("input", this.validate.bind(this));
-    this.signInBtnEl.addEventListener("click", this.onSignInClick.bind(this));
+    this.addListener("#login", "input", this.validate.bind(this));
+    this.addListener("#password", "input", this.validate.bind(this));
+    this.addListener("#sign-in-btn", "click", this.onSignInClick.bind(this));
   }
 
 

@@ -14,7 +14,6 @@ export const checkUserCredentials = function(userName, password) {
     }
   })
   .then(response => {
-    console.log(response);
     if (response.status >= 200 && response.status < 400) {
       return Promise.resolve(response.json());
     } else {
@@ -36,9 +35,46 @@ export const deleteUser = id => fetch(`${API_URL}/users/${id}`, {
 });
 
 export const createUser = (name, job) => {
-  console.log(name, job);
+
+  let newUserData = JSON.stringify({ 
+    name: name,
+    job: job
+  });
+
+  return fetch(`${API_URL}/users`, {
+    body: newUserData,
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    }
+  })
+  .then(response => {
+    if (response.status === 201) {
+      return Promise.resolve(response.json());
+    } else {
+      return Promise.reject("Try again");
+    }
+  });
 }
 
 export const updateUser = (id, name, job) => {
-  console.log(id, name, job);
+
+  let newUserData = JSON.stringify({ 
+    name: name,
+    job: job
+  });
+  return fetch(`${API_URL}/users/${id}`, {
+    body: newUserData,
+    method: "PUT",
+    headers: {
+      "content-type": "application/json"
+    }
+  })
+  .then(response => {
+    if (response.status === 200) {
+      return Promise.resolve(response.json());
+    } else {
+      return Promise.reject("Try again");
+    }
+  });
 }

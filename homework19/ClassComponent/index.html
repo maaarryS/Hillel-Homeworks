@@ -42,12 +42,12 @@
       <dialog class="nes-dialog" id="user-form">
         <form method="dialog" id="user-inner-form">
           <div class="nes-field">
-            <label for="name_field">User name</label>
-            <input type="text" id="name_field" class="nes-input" value="{{first_name}} {{last_name}}">
+            <label for="name-field">User name</label>
+            <input type="text" id="name-field" class="nes-input" value="{{first_name}} {{last_name}}">
           </div>
           <div class="nes-field">
-            <label for="job_field">User job</label>
-            <input type="text" id="job_field" class="nes-input">
+            <label for="job-field">User job</label>
+            <input type="text" id="job-field" class="nes-input">
           </div>
           <menu class="dialog-menu">
             <button class="nes-btn">Cancel</button>
@@ -56,9 +56,9 @@
         </form>
       </dialog>
     </section>
-    <button id="log-out-btn">Log Out</button>
+    <button class="nes-btn" id="log-out-btn">Log Out</button>
     <ul id="list" class="nes-list">
-      <li data-id="{{id}}">
+      <li data-id="{{id}}" class="user-item">
           <img src="{{avatar}}"/>
           <span>{{first_name}} {{last_name}}</span>
           <button class="update">Update</button>
