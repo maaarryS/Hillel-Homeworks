@@ -1,0 +1,19 @@
+$main-color: rgb(166, 110, 240);
+$background-color: rgb(206, 183, 235);
+
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: $main-color;
+}
+
+img {
+  height: 100px;
+}
+
+#app {
+  width: 400px;
+  height: auto;
+  background-color: $background-color;
+}
+
