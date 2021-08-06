@@ -7,19 +7,21 @@ export class UserListComponent extends Component{
     super(template, entryId);
   }
 
-  renderUsers(template, dataObject) { 
+  renderUsers(dataObject) { 
+    let newTemplate = this.templateEl.innerHTML;
     for (let key in dataObject) {
-      template = template.replaceAll(`{{${key}}}`, dataObject[key]);
+      newTemplate = newTemplate.replaceAll(`{{${key}}}`, dataObject[key]);
     }
     
-    return template;
+    return newTemplate;
   };
 
-  renderUserList(page = 1, template) {
-    getUserList(page, template)
+
+  renderUserList(page = 1) {
+    getUserList(page)
     .then(e => {
       const list = e.data.reduce((res, e) => {
-        let result = res + "\n" + `<li>${this.renderUsers(template, e)}</li>`;
+        let result = res + "\n" + `<li>${this.renderUsers(e)}</li>`;
         return result;
       }, "<h1>Users List:</h1>");
 
