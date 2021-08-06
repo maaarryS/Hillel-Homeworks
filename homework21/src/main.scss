@@ -1,5 +1,5 @@
 $main-color: rgb(166, 110, 240);
-$background-color: rgb(206, 183, 235);
+$background-color: rgb(241, 236, 248);
 
 h1 {
   font-size: 48px;
@@ -8,11 +8,11 @@ h1 {
 }
 
 img {
-  height: 100px;
+  height: 150px;
 }
 
 #app {
-  width: 400px;
+  width: 600px;
   height: auto;
   background-color: $background-color;
 }
