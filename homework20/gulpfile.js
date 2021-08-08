@@ -8,11 +8,11 @@ const del = require("del");
 const browserSync = require('browser-sync').create();
 const concat = require('gulp-concat');
 const webserver = require('gulp-webserver');
- 
+
 function webServer() {
   return src('./')
     .pipe(webserver({
-      path: "dist",
+      path: "/",
       port:"8080",
       livereload: true,
       directoryListing: false,
