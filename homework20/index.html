@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Настройка Gulp</title>
+  <link href="./dist/css/style.min.css" rel="stylesheet">
+  <script src="./dist/js/app.min.js" defer></script>
+  
+</head>
+
+<body>
+  <main class="container" id="main-entry"></main>
+
+  <script type="text/template" id="login-form-template">
+    <div class="nes-container actions-form-container block" id="login-form">
+      <span class="hidden" id="error-message">Incorrect credentials</span>
+      <div class="nes-field">
+        <label for="login">Login:</label>
+        <input type="text" class="nes-input" id="login" value="eve.holt@reqres.in">
+      </div>
+      <div class="nes-field">
+        <label for="password">Password:</label>
+        <input type="password" class="nes-input" id="password">
+      </div>
+      <button type="submit" class="nes-btn is-primary actions-form-btn" id="sign-in-btn" disabled>Login</button>
+    </div>
+  </script>
+
+  <script type="text/template" id="user-list-template">
+    <section>
+      <button type="button" class="nes-btn is-primary" id="create-user-btn">
+        New User
+      </button>
+      <dialog class="nes-dialog" id="user-form">
+        <form method="dialog" id="user-inner-form">
+          <div class="nes-field">
+            <label for="name_field">User name</label>
+            <input type="text" id="name_field" class="nes-input" value="{{first_name}} {{last_name}}">
+          </div>
+          <div class="nes-field">
+            <label for="job_field">User job</label>
+            <input type="text" id="job_field" class="nes-input">
+          </div>
+          <menu class="dialog-menu">
+            <button class="nes-btn">Cancel</button>
+            <button class="nes-btn is-primary" id="confirm">Confirm</button>
+          </menu>
+        </form>
+      </dialog>
+    </section>
+    <button id="log-out-btn">Log Out</button>
+    <ul id="list" class="nes-list">
+      <li data-id="{{id}}">
+          <img src="{{avatar}}"/>
+          <span>{{first_name}} {{last_name}}</span>
+          <button class="update">Update</button>
+          <button class="delete">Delete</button>
+      </li>
+    </ul>
+  </script>
+</body>
+</html>
